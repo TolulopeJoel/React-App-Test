@@ -1,0 +1,116 @@
+
+  table.tasks-table td.status.in-review {
+    color: #ffc107;
+  }
+  table.tasks-table td.status.suspended {
+    color: #6c757d;
+  }
+  table.tasks-table td.status.in-progress {
+    color: #007bff;
+  }
+  table.tasks-table td.status.completed {
+    color: #28a745;
+  }
+  table.tasks-table td.status.not-started {
+    color: #f44336;
+  }
+  
+  table.tasks-table tr:hover {
+    background-color: #f6f9fc;
+  }
+  
+  a.create-button {
+    background-color: #6a82f9;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  a.create-button:hover {
+    background-color: #82a4fa;
+  }
+  
+  
+  .filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #f6f6f6;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  
+  .filter input[type='submit'], .filter .logout {
+    background-color: #6a82f9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .filter select, .filter input[type='text'] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .filter select {
+    background-color: #f0f0f0;
+  }
+  
+  .filter input[type='text'] {
+    background-color: #ffffff;
+  }
+  
+  .filter input[type='submit']:hover {
+    background-color: #82a4fa;
+  }
+  
+  .login-header {
+      color: #6a82f9;
+      text-align: center;
+  }
+  
+  .login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f2f2f2;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 2px 2px #6a82f9;
+  }
+  
+  .login input[type="submit"] {
+      background-color: #6a82f9;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      margin-top: 20px;
+      box-shadow: 2px 2px #6a82f9;
+  }
+  
+  .login a {
+      color: #6a82f9;
+      text-decoration: none;
+  }
+  
+  .login p {
+      text-align: center;
+  }
+  
