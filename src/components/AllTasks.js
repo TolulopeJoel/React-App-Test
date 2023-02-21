@@ -45,7 +45,6 @@ function AllTasks() {
         </tbody>
       </table>
       <a href="/tasks/new" className="create-button">Create New Task</a>
-      <TaskDetail />
 
       {/* calendar view of tasks */}
       {/* Include the contents of the "calendar.html" template directly in this component */}

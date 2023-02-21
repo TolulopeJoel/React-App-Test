@@ -36,8 +36,5 @@ function TaskDetail(props) {
 }
 
 
-// export default function Welcome(props) {
-//     return <h1>Hello, {props.cool}</h1>
-//   }
 
 export default TaskDetail;
