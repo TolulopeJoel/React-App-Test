@@ -1,22 +1,15 @@
 import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import TaskDetail from './components/TaskDetail.js';
 import AllTasks from './components/AllTasks.js';
 
 
-const task = {
-  id: 1,
-  name: 'Spit',
-  description: 'Task description goes here',
-  due_date: '2023-02-28',
-  assignee: 'John Doe',
-  status: 'not-started',
-}
-
-function TaskDetailWrapper(props) {
-  const taskProps = { task };
-  return <TaskDetail {...taskProps} {...props} />;
-}
+// function TaskDetailWrapper(props) {
+//   const taskId = useParams()
+//   console.log(taskId)
+//   const task = tasks.find(task => task.id === taskId);
+//   return task ? <TaskDetail {...task} {...props} /> : <div>Task not found</div>;
+// }
 
 
 function App() {
@@ -24,8 +17,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<AllTasks />} />
-        <Route path="/hello" element={<TaskDetailWrapper />}>
-        </Route>
+        {/* <Route path="/tasks/:taskId" element={<TaskDetailWrapper />} /> */}
       </Routes>
     </BrowserRouter>
   );
