@@ -1,40 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-function TaskDetail(props) {
-  const { task } = props;
+
+function TaskDetail() {
+  const { taskId } = useParams();
+  const [task, setTask] = useState(null);
+
+  useEffect(() => {
+    axios.get(`/api/tasks/${taskId}/`).then((response) => {
+      setTask(response.data);
+    });
+  }, [taskId]);
+
+  if (!task) {
+    return <div><h3>Task not found.</h3></div>;
+  }
 
   return (
-    <div>
-      <h1 className="page-title">{task.name} Detail</h1>
-
-      <div className="notion-detail-view">
-        <div className="task-header">
-          <h1 className="task-name">{task.name}</h1>
-          <div className={`task-status ${task.status}`}>{task.status}</div>
-        </div>
-        <div className="task-details">
-          <div className="task-description">
-            <h2>Description</h2>
-            <p>{task.description}</p>
-          </div>
-          <div className="task-due-date">
-            <h2>Due Date</h2>
-            <p>{task.due_date}</p>
-          </div>
-          <div className="task-assignee">
-            <h2>Assignee</h2>
-            <p>{task.assignee}</p>
-          </div>
-        </div>
-        <div className="task-actions">
-          <a href={`/tasks/${task.id}/edit`} className="edit-button">Edit</a>
-          <a href={`/tasks/${task.id}/delete`} className="delete-button">Delete</a>
-        </div>
-      </div>
+    <div className="container">
+      <h1>{task.name}</h1>
+      <table className="task-details-table">
+        <tbody>
+          <tr>
+            <td>Description:</td>
+            <td>{task.description}</td>
+          </tr>
+          <tr>
+            <td>Start Date:</td>
+            <td>{new Date(task.start_date).toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>Due Date:</td>
+            <td>{new Date(task.due_date).toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>Assignee:</td>
+            <td>{task.assignee.username}</td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>{task.status}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
-
-
 
 export default TaskDetail;

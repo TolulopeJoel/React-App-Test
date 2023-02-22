@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<AllTasks />} />
-        {/* <Route path="/tasks/:taskId" element={<TaskDetailWrapper />} /> */}
+        <Route path="/tasks/:taskId" element={<TaskDetail />} />
       </Routes>
     </BrowserRouter>
   );
