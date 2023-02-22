@@ -1,23 +1,27 @@
+/* .task-title {
+  fon
+} */
 
-  table.tasks-table td.status.in-review {
+.task-title, .status, .task-assignee {
+  font-weight: bold;
+}
+
+.status.in-review {
     color: #ffc107;
   }
-  table.tasks-table td.status.suspended {
+.status.suspended {
     color: #6c757d;
   }
-  table.tasks-table td.status.in-progress {
+.status.in-progress {
     color: #007bff;
   }
-  table.tasks-table td.status.completed {
+.status.completed {
     color: #28a745;
   }
-  table.tasks-table td.status.not-started {
+.status.not-started {
     color: #f44336;
   }
   
-  table.tasks-table tr:hover {
-    background-color: #f6f9fc;
-  }
   
   a.create-button {
     background-color: #6a82f9;

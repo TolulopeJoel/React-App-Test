@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import '../Task.css';
 
 class AllTasks extends Component {
   constructor(props) {
@@ -15,11 +16,10 @@ class AllTasks extends Component {
 
   render() {
     const { tasks } = this.state;
-    console.log(tasks);
     return (
       <div className="container">
         <h1>All Tasks</h1>
-        <table className="tasks-table">
+        <table className="table table-bordered table-hover my-5">
           <thead>
             <tr>
               <th>Task</th>
@@ -29,19 +29,17 @@ class AllTasks extends Component {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            {tasks.map(task => (
-              <a href={`/tasks/${task.id}`}>
+          {tasks.map(task => (
+            <tbody>
                 <tr key={task.id}>
                   <td className="task-title"><a href={`/tasks/${task.id}`}>{task.name}</a></td>
                   <td>{task.description.substring(0, 20)}...</td>
-                  <td>{Date(task.due_date)}</td>
-                  <td>{task.assignee.username}</td>
+                  <td>{new Date(task.due_date).toDateString()}</td>
+                  <td className="task-assignee">{task.assignee.username}</td>
                   <td className={`status ${task.status}`}>{task.status}</td>
                 </tr>
-              </a>
-            ))};
-          </tbody>
+            </tbody>
+          ))}
         </table>
         <a href="/tasks/new" className="create-button">Create New Task</a>
 
