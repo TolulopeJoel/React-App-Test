@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import '../Task.css';
 
-class AllTasks extends Component {
+class TaskList extends Component {
   constructor(props) {
     super(props);
     this.state = { tasks: [] };
@@ -52,4 +52,4 @@ class AllTasks extends Component {
   }
 }
 
-export default AllTasks;
+export default TaskList;
