@@ -1,7 +1,10 @@
+import React from "react";
 import axios from "axios";
 
+const apiBaseURL = "http://localhost:8000/api/"
+
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: apiBaseURL,
 });
 
 api.interceptors.request.use((config) => {
@@ -11,5 +14,11 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+
+export const apiWithoutToken = axios.create({
+  baseURL: apiBaseURL,
+});
+
 
 export default api;
