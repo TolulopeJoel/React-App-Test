@@ -1,101 +1,134 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "./api";
 
-class TaskCreate extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      description: "",
-      due_date: "",
-      assignee: "",
-      status: "in-progress",
-      error: null,
-    };
-  }
+export default function CreateTask() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
-  handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  const [teams, setTeams] = useState("");
+  const [teamId, setTeamId] = useState(0);
 
-    this.setState({
-      [name]: value,
-    });
-  };
+  const [fieldErrors, setfieldErrors] = useState({});
+  const [otherErrors, setotherErrors] = useState({});
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
 
-    axios
-      .post("/api/tasks/", this.state)
+  useEffect(() => {
+    api.get(`/teams/`)
       .then((response) => {
-        this.props.history.push(`/tasks/${response.data.id}`);
+        console.log(response.data.results);
+        setTeams(response.data.results);
+        setTeamId(response.data.results[0].id);
       })
-      .catch((error) => {
-        this.setState({ error: error.message });
+      .catch(error =>
+        setotherErrors(error.response.data)
+      );
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await api.post("/tasks/", {
+        name,
+        description,
+        team_id: teamId,
+        due_date: dueDate,
+        start_date: startDate,
+        status: 'not-started',
       });
+      navigate("/")
+    } catch (error) {
+      if (error.response.data.detail) {
+        setotherErrors([error.response.data.detail]);
+      } else if (error.response.data.message) {
+        setotherErrors([error.response.data.message]);
+      } else if (error.response.data.non_field_errors) {
+        setotherErrors(error.response.data.non_field_errors);
+      } else {
+        setfieldErrors(error.response.data);
+      }
+    }
   };
 
-  render() {
-    return (
-      <div className="container">
-        <h1>Create Task</h1>
-        {this.state.error && (
-          <div className="alert alert-danger">{this.state.error}</div>
-        )}
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              className="form-control"
-              id="description"
-              name="description"
-              rows="3"
-              value={this.state.description}
-              onChange={this.handleInputChange}
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label htmlFor="due_date">Due Date</label>
-            <input
-              type="date"
-              className="form-control"
-              id="due_date"
-              name="due_date"
-              value={this.state.due_date}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="assignee">Assignee</label>
-            <input
-              type="text"
-              className="form-control"
-              id="assignee"
-              name="assignee"
-              value={this.state.assignee}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Create
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <h1>Create Task</h1>
+      {otherErrors && Object.values(otherErrors).map((errorMessage) => {
+        return (
+          <div className="alert alert-danger w-100">{errorMessage}</div>
+        )
+      })}
+      <form onSubmit={handleSubmit}>
 
-export default TaskCreate;
+        <div className="form-group">
+          <label htmlFor="due_date">What team are you assigning this task to? </label>
+          <select onChange={(event) => setTeamId(event.target.value)}>
+            {teams && teams.map((team) => (
+              <option value={team.id}>{team.name}</option>
+            ))};
+          </select>
+        </div>
+
+
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          {fieldErrors.name && (<div className="text-danger w-100">{fieldErrors.name}</div>)}
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          {fieldErrors.description && (<div className="text-danger w-100">{fieldErrors.description}</div>)}
+          <textarea
+            className="form-control"
+            id="description"
+            name="description"
+            rows="3"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          ></textarea>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="due_date">Start Date</label>
+          {fieldErrors.start_date && (<div className="text-danger w-100">{fieldErrors.start_date}</div>)}
+          <input
+            type="datetime-local"
+            className="form-control"
+            id="due_date"
+            name="due_date"
+            value={startDate}
+            onChange={(event) => setStartDate(event.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="due_date">Due Date</label>
+          {fieldErrors.due_date && (<div className="text-danger w-100">{fieldErrors.due_date}</div>)}
+          <input
+            type="datetime-local"
+            className="form-control"
+            id="due_date"
+            name="due_date"
+            value={dueDate}
+            onChange={(event) => setDueDate(event.target.value)}
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary">
+          Create
+        </button>
+      </form>
+    </div>
+  );
+}
