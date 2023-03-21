@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 
 const apiBaseURL = "http://localhost:8000/api/"

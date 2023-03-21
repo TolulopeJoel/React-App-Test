@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-
+import api from "./api";
 
 function TaskDetail() {
   const { taskId } = useParams();
   const [task, setTask] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/tasks/${taskId}/`).then((response) => {
+    api.get(`tasks/${taskId}`)
+    .then((response) => {
       setTask(response.data);
+    }).catch((error) => {
+      console.log(error);
     });
   }, [taskId]);
 
@@ -36,7 +38,7 @@ function TaskDetail() {
           </tr>
           <tr>
             <td>Assignee:</td>
-            <td>{task.assignee.username}</td>
+            <td>{task.team.assigner.username}</td>
           </tr>
           <tr>
             <td>Status:</td>
