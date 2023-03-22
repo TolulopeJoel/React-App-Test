@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TaskDetail from './pages/TaskDetail';
-import TaskList from './pages/TaskList';
-import TaskCreate from './pages/TaskCreate';
+import TaskDetail from './pages/task/TaskDetail';
+import TaskList from './pages/task/TaskList';
+import TaskCreate from './pages/task/TaskCreate';
 import SignIn from './components/Auth/SignIn';
 
 

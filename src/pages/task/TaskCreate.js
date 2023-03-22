@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../components/api";
+import api from "../../components/api";
 
 export default function CreateTask() {
   const [name, setName] = useState("");
