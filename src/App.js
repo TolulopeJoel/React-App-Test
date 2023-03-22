@@ -8,6 +8,7 @@ import TaskDetail from './pages/task/TaskDetail';
 import TaskCreate from './pages/task/TaskCreate';
 
 import TeamList from './pages/team/TeamList';
+import TeamDetail from './pages/team/TeamDetail';
 import TeamCreate from './pages/team/TeamCreate';
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/tasks/new" element={<TaskCreate />} />
 
         <Route index element={<TeamList />} />
+        <Route path="/teams/:teamId" element={<TeamDetail />} />
         <Route path="/teams/new" element={<TeamCreate />} />
 
         <Route path="/login" element={<SignIn />} />
