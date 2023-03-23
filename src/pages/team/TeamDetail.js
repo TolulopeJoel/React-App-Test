@@ -10,7 +10,6 @@ export default function TeamDetail() {
         api.get(`teams/${teamId}`)
             .then((response) => {
                 setTeam(response.data);
-                console.log(response.data);
             }).catch((error) => {
                 console.log(error);
             });
@@ -24,28 +23,39 @@ export default function TeamDetail() {
         <>
             <div className="container">
                 <h1>All Tasks</h1>
+
                 <table className="table table-bordered table-hover my-5">
                     <thead>
                         <tr>
                             <th>Task</th>
                             <th>Description</th>
                             <th>Due Date</th>
-                            <th>Assigner</th>
+                            <th>Assignee</th>
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {team.tasks && team.tasks.map(task => (
-                            <tr key={task.id}>
-                                <td className="task-title"><a href={`/tasks/${task.id}`}>{task.name}</a></td>
-                                <td>{task.description.substring(0, 20)}...</td>
-                                <td>{new Date(task.due_date).toDateString()}</td>
-                                <td className="task-assignee">{team.assigner.username}</td>
-                                <td className={`status ${task.status}`}>{task.status}</td>
-                            </tr>
-                        ))}
-                    </tbody>
+
+                    {team.tasks.length > 0 &&
+                        <tbody>
+                            {team.tasks && team.tasks.map(task => (
+                                <tr key={task.id}>
+                                    <td className="task-title"><a href={`/tasks/${task.id}`}>{task.name}</a></td>
+                                    <td>{task.description.substring(0, 20)}...</td>
+                                    <td>{new Date(task.due_date).toDateString()}</td>
+                                    <td className="task-assignee">{task.team && task.team.assigner.username}</td>
+                                    <td className={`status ${task.status}`}>{task.status}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    }
+
+                    {team.tasks.length === 0 &&
+                        <div>
+                            <h4>There are no tasks for this team.<br/>Tell the assigner to add one. Or give you access to do so.</h4>
+                        </div>
+                    }
                 </table>
+
                 <a href="/tasks/new" className="create-button">Create New Task</a>
             </div>
         </>
