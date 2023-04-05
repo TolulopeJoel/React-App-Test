@@ -6,6 +6,7 @@ import SignIn from './components/Auth/SignIn';
 import TaskList from './pages/task/TaskList';
 import TaskDetail from './pages/task/TaskDetail';
 import TaskCreate from './pages/task/TaskCreate';
+import TaskDelete from './pages/task/TaskDelete';
 
 import TeamList from './pages/team/TeamList';
 import TeamDetail from './pages/team/TeamDetail';
@@ -18,9 +19,10 @@ function App() {
       <Routes>
         <Route path="/tasks" element={<TaskList />} />
         <Route path="/tasks/:taskId" element={<TaskDetail />} />
+        <Route path="/tasks/delete/:taskId" element={<TaskDelete />} />
         <Route path="/teams/:teamId/new-task" element={<TaskCreate />} />
 
-        <Route index element={<TeamList />} />
+        <Route path='/teams' element={<TeamList />} />
         <Route path="/teams/:teamId" element={<TeamDetail />} />
         <Route path="/teams/new" element={<TeamCreate />} />
 

@@ -46,6 +46,10 @@ export default function TaskDetail() {
                     </tr>
                 </tbody>
             </table>
+
+            <div className="col-lg-2 col-sm-12 my-2">
+                <a href={`/tasks/delete/${task.id}/`} className="btn btn-outline-danger w-100">Delete</a>
+            </div>
         </div>
     );
 }
