@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import Home from './pages/Home';
 import SignIn from './components/Auth/SignIn';
 
 import TaskList from './pages/task/TaskList';
@@ -18,6 +19,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route index element={<Home />} />
+
         <Route path="/tasks" element={<TaskList />} />
         <Route path="/tasks/:taskId" element={<TaskDetail />} />
         <Route path="/tasks/edit/:taskId" element={<TaskEdit />} />
