@@ -14,7 +14,7 @@ export default function CreateTeam() {
         event.preventDefault();
         try {
             await api.post("/teams/", { name });
-            navigate("/")
+            navigate("/teams")
         } catch (error) {
             if (error.response.data.detail) {
                 setotherErrors([error.response.data.detail]);
