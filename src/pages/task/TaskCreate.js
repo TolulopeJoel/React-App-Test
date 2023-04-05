@@ -8,7 +8,6 @@ export default function CreateTask() {
     const [startDate, setStartDate] = useState("");
     const [dueDate, setDueDate] = useState("");
 
-    const [teams, setTeams] = useState("");
     const { teamId } = useParams();
 
     const [fieldErrors, setfieldErrors] = useState({});
@@ -20,7 +19,6 @@ export default function CreateTask() {
         api.get(`/teams/${teamId}/`)
             .then((response) => {
                 console.log(response.data.results);
-                setTeams(response.data.results);
             })
             .catch(error =>
                 setotherErrors(error.response.data)
@@ -61,16 +59,6 @@ export default function CreateTask() {
                 )
             })}
             <form onSubmit={handleSubmit}>
-
-                {/* <div className="form-group">
-                    <label htmlFor="due_date">What team are you assigning this task to? </label>
-                    <select onChange={(event) => setTeamId(event.target.value)}>
-                        {teams && teams.map((team) => (
-                            <option value={team.id}>{team.name}</option>
-                        ))};
-                    </select>
-                </div> */}
-
 
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
