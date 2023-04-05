@@ -32,7 +32,7 @@ export default function TaskList() {
                                 <td className="task-title"><a href={`/tasks/${task.id}`}>{task.name}</a></td>
                                 <td>{task.description.substring(0, 20)}...</td>
                                 <td>{new Date(task.due_date).toDateString()}</td>
-                                <td className="task-assignee">{task.team.assigner.username}</td>
+                                <td className="task-assignee">{task.team && task.team.assigner.username}</td>
                                 <td className={`status ${task.status}`}>{task.status}</td>
                             </tr>
                         ))}

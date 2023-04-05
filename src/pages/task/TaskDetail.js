@@ -38,7 +38,7 @@ export default function TaskDetail() {
                     </tr>
                     <tr>
                         <td>Assignee:</td>
-                        <td>{task.team.assigner.username}</td>
+                        <td>{task.team && task.team.assigner.username}</td>
                     </tr>
                     <tr>
                         <td>Status:</td>
