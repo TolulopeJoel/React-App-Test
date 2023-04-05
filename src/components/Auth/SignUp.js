@@ -45,7 +45,7 @@ export default function SignUp() {
         first_name: firstName,
         password2: password2,
       });
-      navigate("/signin")
+      navigate("/login")
     } catch (error) {
       if (error.response.data.detail) {
         setotherErrors([error.response.data.detail]);
