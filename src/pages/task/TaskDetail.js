@@ -48,6 +48,10 @@ export default function TaskDetail() {
             </table>
 
             <div className="col-lg-2 col-sm-12 my-2">
+                <a href={`/tasks/edit/${task.id}/`} className="btn btn-outline-dark w-100">Edit</a>
+            </div>
+
+            <div className="col-lg-2 col-sm-12 my-2">
                 <a href={`/tasks/delete/${task.id}/`} className="btn btn-outline-danger w-100">Delete</a>
             </div>
         </div>

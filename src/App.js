@@ -7,6 +7,7 @@ import TaskList from './pages/task/TaskList';
 import TaskDetail from './pages/task/TaskDetail';
 import TaskCreate from './pages/task/TaskCreate';
 import TaskDelete from './pages/task/TaskDelete';
+import TaskEdit from './pages/task/TaskEdit';
 
 import TeamList from './pages/team/TeamList';
 import TeamDetail from './pages/team/TeamDetail';
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/tasks" element={<TaskList />} />
         <Route path="/tasks/:taskId" element={<TaskDetail />} />
+        <Route path="/tasks/edit/:taskId" element={<TaskEdit />} />
         <Route path="/tasks/delete/:taskId" element={<TaskDelete />} />
         <Route path="/teams/:teamId/new-task" element={<TaskCreate />} />
 
