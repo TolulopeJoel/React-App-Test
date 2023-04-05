@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../components/api";
 
 export default function CreateTask() {
@@ -9,7 +9,7 @@ export default function CreateTask() {
     const [dueDate, setDueDate] = useState("");
 
     const [teams, setTeams] = useState("");
-    const [teamId, setTeamId] = useState(0);
+    const { teamId } = useParams();
 
     const [fieldErrors, setfieldErrors] = useState({});
     const [otherErrors, setotherErrors] = useState({});
@@ -17,16 +17,15 @@ export default function CreateTask() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.get(`/teams/`)
+        api.get(`/teams/${teamId}/`)
             .then((response) => {
                 console.log(response.data.results);
                 setTeams(response.data.results);
-                setTeamId(response.data.results[0].id);
             })
             .catch(error =>
                 setotherErrors(error.response.data)
             );
-    }, []);
+    }, [teamId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -39,7 +38,7 @@ export default function CreateTask() {
                 start_date: startDate,
                 status: 'not-started',
             });
-            navigate("/")
+            navigate(`/teams/${teamId}/`)
         } catch (error) {
             if (error.response.data.detail) {
                 setotherErrors([error.response.data.detail]);
@@ -63,14 +62,14 @@ export default function CreateTask() {
             })}
             <form onSubmit={handleSubmit}>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label htmlFor="due_date">What team are you assigning this task to? </label>
                     <select onChange={(event) => setTeamId(event.target.value)}>
                         {teams && teams.map((team) => (
                             <option value={team.id}>{team.name}</option>
                         ))};
                     </select>
-                </div>
+                </div> */}
 
 
                 <div className="form-group">

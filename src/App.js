@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/tasks" element={<TaskList />} />
         <Route path="/tasks/:taskId" element={<TaskDetail />} />
-        <Route path="/tasks/new" element={<TaskCreate />} />
+        <Route path="/teams/:teamId/new-task" element={<TaskCreate />} />
 
         <Route index element={<TeamList />} />
         <Route path="/teams/:teamId" element={<TeamDetail />} />

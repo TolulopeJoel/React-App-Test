@@ -38,7 +38,6 @@ export default function TaskList() {
                         ))}
                     </tbody>
                 </table>
-                <a href="/tasks/new" className="create-button">Create New Task</a>
             </div>
         </>
     );
