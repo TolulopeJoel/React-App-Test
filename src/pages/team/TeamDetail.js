@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 import api from "../../components/api";
 
 export default function TeamDetail() {
@@ -21,6 +22,7 @@ export default function TeamDetail() {
 
     return (
         <>
+            <Navbar />
             <div className="container">
                 <h1>All Tasks</h1>
 
@@ -51,7 +53,7 @@ export default function TeamDetail() {
 
                     {team.tasks.length === 0 &&
                         <div>
-                            <h4>There are no tasks for this team.<br/>Tell the assigner to add one. Or give you access to do so.</h4>
+                            <h4>There are no tasks for this team.<br />Tell the assigner to add one. Or give you access to do so.</h4>
                         </div>
                     }
                 </table>

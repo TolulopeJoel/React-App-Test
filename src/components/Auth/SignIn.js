@@ -1,4 +1,5 @@
 import api from "../api.js";
+import Navbar from "../Navbar";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
@@ -39,7 +40,7 @@ function SignIn() {
       const token = response.data.access;
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem('access_token', token)
-      navigate("/");
+      navigate("/teams/");
     } catch (error) {
       console.error(error);
     }
@@ -47,6 +48,7 @@ function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../components/api";
+import Navbar from "../../components/Navbar";
 import '../../Task.css';
 
 export default function TaskList() {
@@ -14,6 +15,7 @@ export default function TaskList() {
 
     return (
         <>
+            <Navbar />
             <div className="container">
                 <h1>All Tasks</h1>
                 <table className="table table-bordered table-hover my-5">

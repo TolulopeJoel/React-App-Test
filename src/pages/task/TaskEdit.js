@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Navbar from "../../components/Navbar";
 import api from "../../components/api";
 import { NativeSelect } from "@mui/material";
 
@@ -81,6 +82,7 @@ export default function TaskEdit() {
 
     return (
         <ThemeProvider theme={theme}>
+            <Navbar />
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }} >

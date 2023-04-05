@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../components/api";
+import Navbar from "../../components/Navbar";
 import '../../Task.css';
 
 export default function TeamList() {
@@ -16,6 +17,7 @@ export default function TeamList() {
 
     return (
         <>
+        <Navbar />
             <div className="container">
                 <form className="d-flex mt-5" role="search">
                     <input className="form-control form-control-lg me-2" type="search" placeholder="Search sites..." aria-label="Search" />
