@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import SignIn from './components/Auth/SignIn';
+import SignUp from './components/Auth/SignUp';
 
 import TaskList from './pages/task/TaskList';
 import TaskDetail from './pages/task/TaskDetail';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/teams/new" element={<TeamCreate />} />
 
         <Route path="/login" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         {/* <Route path="/tasks/:taskId/delete" element={<TaskDelete />} />
         <Route path="/tasks/:taskId/edit" element={<TaskEdit />} /> */}
       </Routes>
