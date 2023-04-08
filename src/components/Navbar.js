@@ -19,7 +19,7 @@ function Navbar() {
             <div className="container-fluid">
                 <a className="navbar-brand" href="/"><b>RemoteCollaborate</b></a>
 
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                <button className="navbar-toggler bg-success border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
