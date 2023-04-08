@@ -5,6 +5,7 @@ import api from "../../components/api";
 
 export default function CreateTeam() {
     const [name, setName] = useState("");
+    const [temateEmails, setTeamateEmails] = useState("");
 
     const [fieldErrors, setfieldErrors] = useState({});
     const [otherErrors, setotherErrors] = useState({});
@@ -13,7 +14,10 @@ export default function CreateTeam() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await api.post("/teams/", { name });
+            await api.post("/teams/", {
+                name,
+                teamate_emails: temateEmails
+            });
             navigate("/teams")
         } catch (error) {
             if (error.response.data.detail) {
@@ -39,7 +43,7 @@ export default function CreateTeam() {
                     )
                 })}
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
+                    <div className="form-group my-3">
                         <label htmlFor="name">Name</label>
                         {fieldErrors.name && (<div className="text-danger w-100">{fieldErrors.name}</div>)}
                         <input
@@ -52,7 +56,21 @@ export default function CreateTeam() {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary">
+                    <div className="form-group my-3">
+                        <label htmlFor="teamates">Teamates</label>
+                        {fieldErrors.name && (<div className="text-danger w-100">{fieldErrors.name}</div>)}
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="teamates"
+                            name="teamates"
+                            value={temateEmails}
+                            onChange={(event) => setTeamateEmails(event.target.value)}
+                        />
+                        {console.log(typeof temateEmails)}
+                    </div>
+
+                    <button type="submit" className="btn btn-primary my-3">
                         add Team
                     </button>
                 </form>
