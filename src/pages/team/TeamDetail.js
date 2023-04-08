@@ -24,7 +24,7 @@ export default function TeamDetail() {
         <>
             <Navbar />
             <div className="container">
-                <h1>All Tasks</h1>
+                <h1 className="my-4">{team.name}</h1>
 
                 <table className="table table-bordered table-hover my-5">
                     <thead>
@@ -45,7 +45,7 @@ export default function TeamDetail() {
                                     <td>{task.description.substring(0, 20)}...</td>
                                     <td>{new Date(task.due_date).toDateString()}</td>
                                     <td className="task-assignee">{task.assignees && task.assignees.map(assignee => (
-                                        <span>{assignee.username}. </span>
+                                        <span>{assignee.username}, </span>
                                     ))}</td>
                                     <td className={`status ${task.status}`}>{task.status}</td>
                                 </tr>

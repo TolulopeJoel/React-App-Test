@@ -30,8 +30,9 @@ export default function TeamList() {
                     <div>
                         {teams && teams.map(team => (
                             <div>
-                                <div className="border border-2 align-items-center rounded-4 my-5 p-3">
+                                <div className="d-flex justify-content-between border border-2 align-items-center rounded-4 my-5 p-3">
                                     <h6><a href={`/teams/${team.id}`}>{team.name}</a></h6>
+                                    <div><b>{(team.assigner.username).toUpperCase()}</b></div>
                                 </div>
                             </div>
                         ))}
