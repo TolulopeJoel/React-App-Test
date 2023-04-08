@@ -17,9 +17,9 @@ function Navbar() {
     return (
         <nav className="navbar navbar-expand-md navbar-light bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/"><b>RemoteCollaborate</b></a>
+                <a className="navbar-brand text-danger" href="/"><b>RemoteCollaborate</b></a>
 
-                <button className="navbar-toggler bg-success border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
