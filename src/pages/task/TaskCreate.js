@@ -6,10 +6,12 @@ import api from "../../components/api";
 export default function CreateTask() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [assignees, setAssignees] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [dueDate, setDueDate] = useState("");
 
     const { teamId } = useParams();
+    const [team, setTeam] = useState("");
 
     const [fieldErrors, setfieldErrors] = useState({});
     const [otherErrors, setotherErrors] = useState({});
@@ -19,7 +21,7 @@ export default function CreateTask() {
     useEffect(() => {
         api.get(`/teams/${teamId}/`)
             .then((response) => {
-                console.log(response.data.results);
+                setTeam(response.data);
             })
             .catch(error =>
                 setotherErrors(error.response.data)
@@ -30,13 +32,14 @@ export default function CreateTask() {
         event.preventDefault();
         try {
             await api.post("/tasks/", {
+                team_id: teamId,
                 name,
                 description,
-                team_id: teamId,
-                due_date: dueDate,
-                start_date: startDate,
                 status: 'not-started',
-            });
+                start_date: startDate,
+                due_date: dueDate,
+                assignees_username: assignees.join(','),
+            })
             navigate(`/teams/${teamId}/`)
         } catch (error) {
             if (error.response.data.detail) {
@@ -50,6 +53,20 @@ export default function CreateTask() {
             }
         }
     };
+
+    const handleAssigneesChange = (event) => {
+        const selectedAssignee = event.target.value;
+        const assigneeIndex = assignees.indexOf(selectedAssignee);
+
+        if (assigneeIndex === -1) {
+            // Add the assignee to the list of selected assignees
+            setAssignees(prevAssignees => [...prevAssignees, selectedAssignee]);
+        } else {
+            // Remove the assignee from the list of selected assignees
+            setAssignees(prevAssignees => prevAssignees.filter(assignee => assignee !== selectedAssignee));
+        }
+    };
+
 
     return (
         <>
@@ -114,6 +131,26 @@ export default function CreateTask() {
                             onChange={(event) => setDueDate(event.target.value)}
                         />
                     </div>
+
+                    {team.teamates && team.teamates.map(teamate => (
+                        <div className="form-group">
+                            {fieldErrors.assignees && (<div className="text-danger w-100">{fieldErrors.assignees}</div>)}
+                            <input
+                                type="checkbox"
+                                id={teamate.username}
+                                name={teamate.username}
+                                value={teamate.username}
+                                onChange={(event) => {
+                                    if (event.target.checked) {
+                                        setAssignees(assignees.concat([teamate.username]));
+                                    } else {
+                                        setAssignees(assignees.filter((username) => username !== teamate.username));
+                                    }
+                                }}
+                            />
+                            <label htmlFor="assignees">{teamate.username}</label>
+                        </div>
+                    ))}
 
                     <button type="submit" className="btn btn-primary">
                         Create
