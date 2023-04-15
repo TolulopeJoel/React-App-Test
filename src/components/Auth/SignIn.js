@@ -1,4 +1,4 @@
-import api from "../api.js";
+import api from "../Api";
 import Navbar from "../Navbar";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';

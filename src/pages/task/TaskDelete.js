@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../../components/api";
+import api from "../../components/Api";
 
 
 export default function TaskDelete() {

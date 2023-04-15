@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import api from "../../components/api";
+import api from "../../components/Api";
 
 export default function CreateTeam() {
     const [name, setName] = useState("");
