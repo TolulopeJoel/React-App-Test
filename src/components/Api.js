@@ -7,12 +7,18 @@ const api = axios.create({
   baseURL: apiBaseURL,
 });
 
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+  return config;
+});
+
+
 api.interceptors.response.use(
   function (response) {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-      response.headers["Authorization"] = `Bearer ${token}`;
-    }
     return response;
   },
   function (error) {
@@ -21,8 +27,6 @@ api.interceptors.response.use(
       // Redirect the user to the sign-in page
       window.location.href = '/login';
     }
-
-    // Return the error
     return Promise.reject(error);
   }
 );
