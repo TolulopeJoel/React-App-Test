@@ -25,6 +25,7 @@ api.interceptors.response.use(
     // Check if the error is due to an invalid or expired token
     if (error.response.status === 401) {
       // Redirect the user to the sign-in page
+      localStorage.removeItem("access_token");
       window.location.href = '/login';
     }
     return Promise.reject(error);
