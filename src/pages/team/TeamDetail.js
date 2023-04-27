@@ -6,15 +6,28 @@ import api from "../../components/Api";
 export default function TeamDetail() {
     const { teamId } = useParams();
     const [team, setTeam] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         api.get(`teams/${teamId}`)
             .then((response) => {
+                setLoading(false);
                 setTeam(response.data);
             }).catch((error) => {
+                setLoading(false);
                 console.log(error);
             });
     }, [teamId]);
+
+    if (loading) {
+        return (
+            <div className="loading">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
     if (!team) {
         return <div><h3>Team not found.</h3></div>;

@@ -5,13 +5,25 @@ import '../../Task.css';
 
 export default function TaskList() {
     const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         api.get('/tasks/',)
             .then((response) => {
+                setLoading(false);
                 setTasks(response.data.results);
             }).catch(error => console.log(error));
     }, []);
+
+    if (loading) {
+        return (
+            <div className="loading">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>

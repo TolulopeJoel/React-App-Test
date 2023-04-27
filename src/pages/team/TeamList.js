@@ -5,15 +5,25 @@ import '../../Task.css';
 
 export default function TeamList() {
     const [teams, setTeams] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         api.get('/teams/')
             .then((response) => {
                 setTeams(response.data.results);
+                setLoading(false);
             }).catch(error => console.log(error));
     }, []);
 
-
+    if (loading) {
+        return (
+            <div className="loading">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>
