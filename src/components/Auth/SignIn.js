@@ -35,9 +35,11 @@ function SignIn() {
         username,
         password,
       });
-      const token = response.data.access;
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      localStorage.setItem('access_token', token)
+      const access_token = response.data.access;
+      const refresh_token = response.data.refresh;
+      api.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+      localStorage.setItem('access_token', access_token)
+      localStorage.setItem('refresh_token', refresh_token)
       navigate("/teams/");
     } catch (error) {
       console.error(error);
