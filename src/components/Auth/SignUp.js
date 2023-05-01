@@ -102,9 +102,6 @@ export default function SignUp() {
                 {fieldErrors.password2 && (<div className="text-danger w-100">{fieldErrors.password2}</div>)}
                 <TextField required fullWidth label="Confirm Password" type="password" id="password2" value={password2} onChange={(event) => setPassword2(event.target.value)} />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel control={<Checkbox value="allowExtraEmails" color="primary" />} label="I want to receive inspiration and updates via email." />
-              </Grid>
             </Grid>
             <Button type="submit" fullWidth variant="contained" className="bg-success" sx={{ mt: 3, mb: 2 }}> Sign Up </Button>
             <Grid container justifyContent="flex-end">
