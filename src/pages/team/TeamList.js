@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from "react";
 import api from "../../components/Api";
 import Navbar from "../../components/Navbar";
-import '../../Task.css';
+import { Pagination } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 export default function TeamList() {
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
     useEffect(() => {
-        api.get('/teams/')
+        api.get(`/teams/?page=${currentPage}`)
             .then((response) => {
-                setTeams(response.data.results);
                 setLoading(false);
+                setTeams(response.data.results);
+                setTotalPages(Math.ceil(response.data.count / 10));
             }).catch(error => console.log(error));
     }, []);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     if (loading) {
         return (
@@ -27,7 +37,7 @@ export default function TeamList() {
 
     return (
         <>
-        <Navbar />
+            <Navbar />
             <div className="container">
 
                 <h1 className="display-6 my-5">Select a team to view tasks.</h1>
@@ -52,7 +62,13 @@ export default function TeamList() {
                 }
 
                 <a href="/teams/new" className="btn btn-lg my-3 mx-auto add-password text-primary">Add new team +</a>
+                <div className="d-flex justify-content-center align-items-center mt-5">
+                    <Stack spacing={2}>
+                        <Pagination count={totalPages} page={currentPage} shape='rounded' onChange={handlePageChange} />
+                    </Stack>
+                </div>
             </div>
+
         </>
 
     );

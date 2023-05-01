@@ -3,18 +3,30 @@ import api from "../../components/Api";
 import Navbar from "../../components/Navbar";
 import '../../Task.css';
 import TaskListTable from "../../components/TaskListTable";
+import { Pagination } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 export default function TaskList() {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
     useEffect(() => {
-        api.get('/tasks/',)
+        api.get(`/tasks/?page=${currentPage}`)
             .then((response) => {
                 setLoading(false);
                 setTasks(response.data.results);
-            }).catch(error => console.log(error));
-    }, []);
+                setTotalPages(Math.ceil(response.data.count / 10));
+            })
+            .catch((error) => console.log(error));
+    }, [currentPage]);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     if (loading) {
         return (
@@ -32,6 +44,12 @@ export default function TaskList() {
             <div className="container">
                 <h1>All Tasks</h1>
                 <TaskListTable tasks={tasks} />
+
+                <div className="d-flex justify-content-center align-items-center mt-5">
+                    <Stack spacing={2}>
+                        <Pagination count={totalPages} page={currentPage} shape='rounded' onChange={handlePageChange} />
+                    </Stack>
+                </div>
             </div>
         </>
     );
