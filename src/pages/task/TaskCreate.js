@@ -148,7 +148,7 @@ export default function CreateTask() {
                     ))}
 
                     <button type="submit" className="btn btn-success btn-gradient btn-lg w-100 p-2 my-3">
-                        Create
+                        Create task
                     </button>
                 </form>
             </div>

@@ -71,8 +71,8 @@ export default function CreateTeam() {
                         {console.log(typeof temateEmails)}
                     </div>
 
-                    <button type="submit" className="btn btn-primary my-3">
-                        add Team
+                    <button type="submit" className="btn btn-success btn-gradient btn-lg w-100 p-2 my-3">
+                        Create Team
                     </button>
                 </form>
             </div></>
