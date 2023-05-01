@@ -42,7 +42,7 @@ export default function TeamDetail() {
 
                 <TaskListTable tasks={team.tasks} />
 
-                <a href={`/teams/${team.id}/new-task`} className="create-button">Create New Task</a>
+                <a href={`/teams/${team.id}/new-task`} className="btn btn-success btn-gradient btn-lg w-25 p-2 my-3">Create new task</a>
             </div>
         </>
     );
