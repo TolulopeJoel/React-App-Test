@@ -5,6 +5,8 @@ import '../../Task.css';
 import TaskListTable from "../../components/TaskListTable";
 import { Pagination } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 export default function TaskList() {
     const [tasks, setTasks] = useState([]);
@@ -50,6 +52,19 @@ export default function TaskList() {
                         <Pagination count={totalPages} page={currentPage} shape='rounded' onChange={handlePageChange} />
                     </Stack>
                 </div>
+
+                <FullCalendar
+                    plugins={[dayGridPlugin]}
+                    initialView="dayGridMonth"
+                    events={tasks.map(task => ({
+                        title: task.name,
+                        start: task.start_date,
+                        end: task.end_date,
+                    }))}
+                    eventDurationEditable={false}
+                    eventDuration={"00:00:01"}
+                    displayEventTime={true}
+                />
             </div>
         </>
     );
