@@ -81,37 +81,37 @@ export default function CreateTask() {
                 <form onSubmit={handleSubmit}>
 
                     <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        {fieldErrors.name && (<div className="text-danger w-100">{fieldErrors.name}</div>)}
+                        {fieldErrors.name && (<div className="text-danger">{fieldErrors.name}</div>)}
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control my-3 p-3"
                             id="name"
                             name="name"
                             value={name}
+                            placeholder="Name"
                             onChange={(event) => setName(event.target.value)}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="description">Description</label>
                         {fieldErrors.description && (<div className="text-danger w-100">{fieldErrors.description}</div>)}
                         <textarea
-                            className="form-control"
+                            className="form-control my-3 p-3"
                             id="description"
                             name="description"
                             rows="3"
                             value={description}
+                            placeholder="Description"
                             onChange={(event) => setDescription(event.target.value)}
                         ></textarea>
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-group my-3">
                         <label htmlFor="due_date">Start Date</label>
                         {fieldErrors.start_date && (<div className="text-danger w-100">{fieldErrors.start_date}</div>)}
                         <input
                             type="datetime-local"
-                            className="form-control"
+                            className="form-control p-3"
                             id="due_date"
                             name="due_date"
                             value={startDate}
@@ -119,12 +119,12 @@ export default function CreateTask() {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-group my-3">
                         <label htmlFor="due_date">Due Date</label>
                         {fieldErrors.due_date && (<div className="text-danger w-100">{fieldErrors.due_date}</div>)}
                         <input
                             type="datetime-local"
-                            className="form-control"
+                            className="form-control p-3"
                             id="due_date"
                             name="due_date"
                             value={dueDate}
@@ -133,26 +133,21 @@ export default function CreateTask() {
                     </div>
 
                     {team.teamates && team.teamates.map(teamate => (
-                        <div className="form-group">
+                        <div className="form-group form-check-inline px-3 my-3">
                             {fieldErrors.assignees && (<div className="text-danger w-100">{fieldErrors.assignees}</div>)}
                             <input
+                                style={{transform: 'scale(3.0)'}}
                                 type="checkbox"
                                 id={teamate.username}
                                 name={teamate.username}
                                 value={teamate.username}
-                                onChange={(event) => {
-                                    if (event.target.checked) {
-                                        setAssignees(assignees.concat([teamate.username]));
-                                    } else {
-                                        setAssignees(assignees.filter((username) => username !== teamate.username));
-                                    }
-                                }}
+                                onChange={(event) => handleAssigneesChange(event)}
                             />
-                            <label htmlFor="assignees">{teamate.username}</label>
+                            <label htmlFor="assignees" className="ps-3"><p>{teamate.username}</p></label>
                         </div>
                     ))}
 
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-success btn-gradient btn-lg w-100 p-2 my-3">
                         Create
                     </button>
                 </form>
