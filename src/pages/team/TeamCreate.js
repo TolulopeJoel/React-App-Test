@@ -57,7 +57,7 @@ export default function CreateTeam() {
                     </div>
 
                     <div className="form-group my-3">
-                        <label htmlFor="teamates">Teamates</label>
+                        <label htmlFor="teamates">Enter teamates emails to add them</label>
                         {fieldErrors.name && (<div className="text-danger w-100">{fieldErrors.name}</div>)}
                         <input
                             type="text"
@@ -65,6 +65,7 @@ export default function CreateTeam() {
                             id="teamates"
                             name="teamates"
                             value={temateEmails}
+                            placeholder="mate@mail.com, manager@mail.com, pm@mail.com, cto@mail.com"
                             onChange={(event) => setTeamateEmails(event.target.value)}
                         />
                         {console.log(typeof temateEmails)}
