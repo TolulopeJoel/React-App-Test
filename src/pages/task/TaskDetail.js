@@ -15,6 +15,7 @@ export default function TaskDetail() {
                 setLoading(false);
                 setTask(response.data);
             }).catch((error) => {
+                setLoading(false);
                 console.log(error);
             });
     }, [taskId]);
