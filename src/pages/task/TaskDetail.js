@@ -7,14 +7,27 @@ export default function TaskDetail() {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
 
+     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         api.get(`tasks/${taskId}`)
             .then((response) => {
+                setLoading(false);
                 setTask(response.data);
             }).catch((error) => {
                 console.log(error);
             });
     }, [taskId]);
+    
+    if (loading) {
+        return (
+            <div className="loading">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
     if (!task) {
         return <div><h3>Task not found.</h3></div>;
