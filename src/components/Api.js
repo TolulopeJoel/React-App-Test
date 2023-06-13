@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiBaseURL = "https://remote-collaborate.up.railway.app/api/";
+const apiBaseURL = "https://remote-collaborate.onrender.com/api/";
 
 const api = axios.create({
   baseURL: apiBaseURL,
